@@ -90,7 +90,8 @@ export const getSession = <Option extends BetterAuthOptions>() =>
 				);
 
 				if (!sessionCookieToken) {
-					return null;
+					ctx.setHeader("Cache-Control", "no-store");
+					return ctx.json(null);
 				}
 
 				const sessionDataCookie = getChunkedCookie(
@@ -270,6 +271,7 @@ export const getSession = <Option extends BetterAuthOptions>() =>
 									createdAt: new Date(session.user.createdAt),
 									updatedAt: new Date(session.user.updatedAt),
 								});
+								ctx.setHeader("Cache-Control", "no-store");
 								return ctx.json({
 									session: parsedSession,
 									user: parsedUser,
@@ -335,6 +337,7 @@ export const getSession = <Option extends BetterAuthOptions>() =>
 									session: parsedRefreshedSession,
 									user: parsedRefreshedUser,
 								};
+								ctx.setHeader("Cache-Control", "no-store");
 								return ctx.json({
 									session: parsedRefreshedSession,
 									user: parsedRefreshedUser,
@@ -360,6 +363,7 @@ export const getSession = <Option extends BetterAuthOptions>() =>
 								session: parsedSession,
 								user: parsedUser,
 							};
+							ctx.setHeader("Cache-Control", "no-store");
 							return ctx.json({
 								session: parsedSession,
 								user: parsedUser,
@@ -387,6 +391,7 @@ export const getSession = <Option extends BetterAuthOptions>() =>
 							);
 						}
 					}
+					ctx.setHeader("Cache-Control", "no-store");
 					return ctx.json(null);
 				}
 				/**
@@ -400,6 +405,7 @@ export const getSession = <Option extends BetterAuthOptions>() =>
 						session.session,
 					);
 					const parsedUser = parseUserOutput(ctx.context.options, session.user);
+					ctx.setHeader("Cache-Control", "no-store");
 					return ctx.json({
 						session: parsedSession,
 						user: parsedUser,
@@ -441,6 +447,7 @@ export const getSession = <Option extends BetterAuthOptions>() =>
 						session.session,
 					);
 					const parsedUser = parseUserOutput(ctx.context.options, session.user);
+					ctx.setHeader("Cache-Control", "no-store");
 					return ctx.json({
 						session: parsedSession,
 						user: parsedUser,
@@ -489,6 +496,7 @@ export const getSession = <Option extends BetterAuthOptions>() =>
 						updatedSession,
 					);
 					const parsedUser = parseUserOutput(ctx.context.options, session.user);
+					ctx.setHeader("Cache-Control", "no-store");
 					return ctx.json({
 						session: parsedUpdatedSession,
 						user: parsedUser,
@@ -504,6 +512,7 @@ export const getSession = <Option extends BetterAuthOptions>() =>
 					session.session,
 				);
 				const parsedUser = parseUserOutput(ctx.context.options, session.user);
+				ctx.setHeader("Cache-Control", "no-store");
 				return ctx.json({
 					session: parsedSession,
 					user: parsedUser,

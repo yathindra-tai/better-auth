@@ -469,6 +469,9 @@ describe("session", async () => {
 				});
 
 				expect(sessionResWithHeaders.headers).toBeDefined();
+				expect(sessionResWithHeaders.headers.get("cache-control")).toBe(
+					"no-store",
+				);
 				expect(sessionResWithHeaders.response?.user).toBeDefined();
 				expect(sessionResWithHeaders.response?.session).toBeDefined();
 				expectTypeOf({
